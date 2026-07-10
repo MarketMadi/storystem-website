@@ -344,102 +344,158 @@
       margin-bottom: 1.25rem;
     }
 
-    /* Testimonials */
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+    /* Quote carousel */
+    .quote-carousel {
+      max-width: 40rem;
+      margin: 0 auto;
+      text-align: center;
     }
 
-    .testimonial-card {
-      background: white;
-      border-radius: var(--radius);
-      padding: 1.75rem;
-      border: 1px solid var(--border);
-      text-align: left;
+    .quote-stage {
+      position: relative;
+      min-height: 11rem;
+      margin-bottom: 1.75rem;
     }
 
-    .testimonial-card blockquote {
+    .quote-slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      pointer-events: none;
+    }
+
+    .quote-slide.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .quote-slide blockquote {
       font-family: "Fraunces", Georgia, serif;
-      font-size: 1.15rem;
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
       font-weight: 600;
       line-height: 1.45;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
       margin-bottom: 1.25rem;
     }
 
-    .testimonial-card cite {
-      font-style: normal;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .testimonial-card cite strong {
-      color: var(--ink);
-      display: block;
-      margin-bottom: 0.15rem;
-    }
-
-    .testimonial-featured {
-      text-align: center;
-      max-width: 36rem;
-      margin: 0 auto;
-    }
-
-    .testimonial-featured blockquote {
-      font-family: "Fraunces", Georgia, serif;
-      font-size: clamp(1.25rem, 2.5vw, 1.6rem);
-      font-weight: 600;
-      line-height: 1.45;
-      letter-spacing: -0.01em;
-      margin-bottom: 1.5rem;
-    }
-
-    .testimonial-featured blockquote::before {
+    .quote-slide blockquote::before {
       content: "\201C";
       display: block;
-      font-size: 3rem;
+      font-size: 2.5rem;
       color: var(--wood);
       line-height: 1;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
     }
 
-    .testimonial-featured cite {
+    .quote-slide cite {
       font-style: normal;
       font-size: 0.95rem;
       color: var(--muted);
     }
 
-    .testimonial-featured cite strong {
+    .quote-slide cite strong {
       color: var(--ink);
       display: block;
       margin-bottom: 0.15rem;
     }
 
-    /* Guide CTA */
-    .guide-cta {
-      background: var(--ink);
-      color: var(--cream);
-      border-radius: var(--radius);
-      padding: 3rem;
+    .quote-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .quote-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: none;
+      background: var(--border);
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .quote-dot.active {
+      background: var(--matatu);
+      transform: scale(1.2);
+    }
+
+    /* Guide */
+    .guide-layout {
       display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 2rem;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3rem;
       align-items: center;
     }
 
-    .guide-cta h2 {
-      color: var(--cream);
-      margin-bottom: 0.75rem;
+    .guide-comic {
+      position: relative;
     }
 
-    .guide-cta p {
-      color: rgba(250, 246, 240, 0.7);
-      max-width: 32rem;
+    .guide-comic img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      box-shadow: 0 24px 60px rgba(26, 22, 18, 0.18);
+      display: block;
+      border: 4px solid white;
     }
 
-    .guide-cta .btn-primary {
-      white-space: nowrap;
+    .guide-comic-caption {
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .guide-content h2 {
+      margin-bottom: 1rem;
+    }
+
+    .guide-content p {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+    }
+
+    .guide-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .guide-features li {
+      font-size: 0.95rem;
+      color: var(--ink);
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .guide-features li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--matatu);
+    }
+
+    .guide-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
     }
 
     /* Contact */
@@ -524,14 +580,14 @@
       .hero-grid,
       .about-grid,
       .contact-grid,
-      .guide-cta,
+      .guide-layout,
       .offerings { grid-template-columns: 1fr; }
-      .testimonials-grid { grid-template-columns: 1fr; }
+      .guide-comic { order: -1; }
       .hero { padding: 2.5rem 0 3rem; }
       .hero-image { order: -1; }
       .hero-badge { left: 0.5rem; bottom: -0.5rem; }
       section { padding: 3rem 0; }
-      .guide-cta { padding: 2rem; }
+      .quote-stage { min-height: 13rem; }
     }
   </style>
 </head>
@@ -560,7 +616,7 @@
         <a href="#offerings">Programs</a>
         <a href="#guide">Guide</a>
         <a href="#contact">Contact</a>
-        <a href="https://wa.me/447493111184?text=Hi%2C%20I%27d%20like%20to%20buy%20the%20StoryStem%20Matatu%20kit" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Buy the Kit</a>
+        <a href="https://wa.me/447493111184" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Buy the Kit</a>
       </nav>
     </div>
   </header>
@@ -573,7 +629,7 @@
           <h1>Build a real Matatu robot. Take it home forever.</h1>
           <p class="hero-lead">StoryStem teaches kids real electronics and Arduino programming through African stories — not toys, but engineering they can show at science fairs and university interviews.</p>
           <div class="hero-actions">
-            <a href="https://wa.me/447493111184?text=Hi%2C%20I%27d%20like%20to%20buy%20the%20StoryStem%20Matatu%20kit" class="btn btn-primary">Buy the Kit</a>
+            <a href="https://wa.me/447493111184" class="btn btn-primary">Buy the Kit</a>
             <a href="#offerings" class="btn btn-secondary">School Programs</a>
           </div>
         </div>
@@ -642,44 +698,55 @@
       </div>
     </section>
 
-    <section>
+    <section id="quotes">
       <div class="wrap">
-        <p class="section-label">What people say</p>
+        <p class="section-label" style="text-align: center;">What people say</p>
         <h2 style="text-align: center; margin-bottom: 2.5rem;">The moments that matter</h2>
-        <div class="testimonials-grid">
-          <article class="testimonial-card">
-            <blockquote>The moment they got it working was incredible. They learned more from fixing their mistakes than from following steps perfectly.</blockquote>
-            <cite>
-              <strong>Caroline</strong>
-              Women in STEAM Initiative
-            </cite>
-          </article>
-          <article class="testimonial-card">
-            <blockquote>When can we do this again?</blockquote>
-            <cite>
-              <strong>Anonymous</strong>
-              Student
-            </cite>
-          </article>
-          <article class="testimonial-card">
-            <blockquote>Wooooaaah!</blockquote>
-            <cite>
-              <strong>A group of kids</strong>
-              The first time a DC motor spins
-            </cite>
-          </article>
+        <div class="quote-carousel" id="quote-carousel">
+          <div class="quote-stage">
+            <article class="quote-slide active">
+              <blockquote>The moment they got it working was incredible. They learned more from fixing their mistakes than from following steps perfectly.</blockquote>
+              <cite><strong>Caroline</strong>Women in STEAM Initiative</cite>
+            </article>
+            <article class="quote-slide">
+              <blockquote>When can we do this again?</blockquote>
+              <cite><strong>Anonymous</strong>Student</cite>
+            </article>
+            <article class="quote-slide">
+              <blockquote>Wooooaaah!</blockquote>
+              <cite><strong>A group of kids</strong>The first time a DC motor spins</cite>
+            </article>
+          </div>
+          <div class="quote-dots" role="tablist" aria-label="Testimonials">
+            <button class="quote-dot active" aria-label="Quote 1" data-index="0"></button>
+            <button class="quote-dot" aria-label="Quote 2" data-index="1"></button>
+            <button class="quote-dot" aria-label="Quote 3" data-index="2"></button>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="guide">
       <div class="wrap">
-        <div class="guide-cta">
-          <div>
-            <h2>The Matatu That Remembered</h2>
-            <p>Our 48-page story-driven builder's guide walks students through every chapter — from first LED circuit to a Bluetooth-controlled, obstacle-avoiding Matatu. Professionally produced and available to purchase.</p>
+        <div class="guide-layout">
+          <div class="guide-comic">
+            <img src="assets/comic.jpg" alt="Comic from the StoryStem guide — 16-year-old Amani opens her kit, messages her friends, and begins building her Matatu robot" width="700" height="990" loading="lazy">
+            <p class="guide-comic-caption">From the builder's guide — Amani's story begins before the first wire connects.</p>
           </div>
-          <a href="https://dapsmith8.gumroad.com/l/ztnwfj" class="btn btn-primary" target="_blank" rel="noopener">Buy the Guide on Gumroad</a>
+          <div class="guide-content">
+            <p class="section-label">The Builder's Guide</p>
+            <h2>The Matatu That Remembered</h2>
+            <p>A 48-page story-driven guide that walks students through every chapter — from first LED circuit to a Bluetooth-controlled, obstacle-avoiding Matatu. Illustrated, professionally produced, and rooted in Nairobi.</p>
+            <ul class="guide-features">
+              <li>Follow Amani, a 16-year-old preparing for Nairobi Hack Weekend</li>
+              <li>5 chapters of real engineering — circuits, motors, Arduino, sensors</li>
+              <li>African context, real problems, genuine engineering decisions</li>
+            </ul>
+            <div class="guide-actions">
+              <a href="https://dapsmith8.gumroad.com/l/ztnwfj" class="btn btn-primary" target="_blank" rel="noopener">Buy on Gumroad</a>
+              <a href="https://wa.me/447493111184" class="btn btn-secondary">Ask a Question</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -704,18 +771,6 @@
               <span class="value">+44 7493 111184</span>
             </div>
           </a>
-          <a href="tel:+254119665993" class="contact-item">
-            <div>
-              <span class="label">Kenya</span>
-              <span class="value">0119 665 993</span>
-            </div>
-          </a>
-          <a href="https://www.linkedin.com/company/storystem" class="contact-item" target="_blank" rel="noopener">
-            <div>
-              <span class="label">LinkedIn</span>
-              <span class="value">StorySTEM</span>
-            </div>
-          </a>
           <a href="https://storystem.substack.com" class="contact-item" target="_blank" rel="noopener">
             <div>
               <span class="label">Newsletter</span>
@@ -732,6 +787,39 @@
       <p>StoryStem · Engineering Through True Stories · Nairobi, Kenya · © 2026</p>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var slides = document.querySelectorAll('.quote-slide');
+      var dots = document.querySelectorAll('.quote-dot');
+      var current = 0;
+      var timer;
+
+      function show(index) {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = (index + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+      }
+
+      function next() { show(current + 1); }
+
+      function start() {
+        clearInterval(timer);
+        timer = setInterval(next, 4500);
+      }
+
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+          show(parseInt(dot.dataset.index, 10));
+          start();
+        });
+      });
+
+      start();
+    })();
+  </script>
 
 </body>
 </html>
