@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryStem — Engineering Through True Stories</title>
+  <meta name="description" content="Nairobi-based robotics education. Kids build a Bluetooth-controlled Matatu robot from scratch — real components, real code, African stories.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1612;
+      --cream: #faf6f0;
+      --warm: #f3ebe0;
+      --wood: #c4a574;
+      --matatu: #e85d2a;
+      --matatu-dark: #c44a1c;
+      --leaf: #2d6a4f;
+      --muted: #6b5e52;
+      --border: rgba(26, 22, 18, 0.1);
+      --shadow: 0 20px 50px rgba(26, 22, 18, 0.08);
+      --radius: 16px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "DM Sans", system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--matatu); text-decoration: none; }
+    a:hover { color: var(--matatu-dark); }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 246, 240, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .brand:hover { color: var(--ink); }
+
+    .brand svg { flex-shrink: 0; }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .brand-name {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-tag {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    nav a:hover { color: var(--ink); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+      text-decoration: none;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: var(--matatu);
+      color: white;
+      box-shadow: 0 4px 16px rgba(232, 93, 42, 0.35);
+    }
+
+    .btn-primary:hover {
+      background: var(--matatu-dark);
+      color: white;
+      box-shadow: 0 6px 24px rgba(232, 93, 42, 0.4);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--ink);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--warm);
+      color: var(--ink);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 4rem 0 5rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--leaf);
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(2.25rem, 5vw, 3.25rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-lead {
+      font-size: 1.15rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      max-width: 32rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: block;
+    }
+
+    .hero-badge {
+      position: absolute;
+      bottom: -1rem;
+      left: -1rem;
+      background: white;
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      box-shadow: var(--shadow);
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero-badge span {
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    /* Sections */
+    section {
+      padding: 5rem 0;
+    }
+
+    section:nth-child(even) {
+      background: var(--warm);
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--matatu);
+      margin-bottom: 0.75rem;
+    }
+
+    h2 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 42rem;
+      margin-bottom: 2.5rem;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .about-points li {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .about-points .icon {
+      flex-shrink: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 8px rgba(26, 22, 18, 0.06);
+    }
+
+    .about-points strong {
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    .about-points p {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    /* Offerings */
+    .offerings {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .offering-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .offering-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+
+    .offering-card .tier {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--leaf);
+      margin-bottom: 0.5rem;
+    }
+
+    .offering-card h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .offering-card p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      flex: 1;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Testimonial */
+    .testimonial {
+      text-align: center;
+      max-width: 36rem;
+      margin: 0 auto;
+    }
+
+    .testimonial blockquote {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+      font-weight: 600;
+      line-height: 1.45;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .testimonial blockquote::before {
+      content: "\201C";
+      display: block;
+      font-size: 3rem;
+      color: var(--wood);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .testimonial cite {
+      font-style: normal;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .testimonial cite strong {
+      color: var(--ink);
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    /* Guide CTA */
+    .guide-cta {
+      background: var(--ink);
+      color: var(--cream);
+      border-radius: var(--radius);
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .guide-cta h2 {
+      color: var(--cream);
+      margin-bottom: 0.75rem;
+    }
+
+    .guide-cta p {
+      color: rgba(250, 246, 240, 0.7);
+      max-width: 32rem;
+    }
+
+    .guide-cta .btn-primary {
+      white-space: nowrap;
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: white;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      color: var(--ink);
+      text-decoration: none;
+      transition: box-shadow 0.15s;
+    }
+
+    .contact-item:hover {
+      box-shadow: 0 4px 16px rgba(26, 22, 18, 0.06);
+      color: var(--ink);
+    }
+
+    .contact-item .label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      display: block;
+    }
+
+    .contact-item .value {
+      font-weight: 600;
+    }
+
+    /* Footer */
+    footer {
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* Mobile nav */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--ink);
+    }
+
+    @media (max-width: 768px) {
+      nav { display: none; }
+      nav.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--cream);
+        padding: 1rem 1.5rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+        gap: 0.75rem;
+      }
+      .nav-toggle { display: block; }
+      header .wrap { position: relative; }
+      .hero-grid,
+      .about-grid,
+      .contact-grid,
+      .guide-cta,
+      .offerings { grid-template-columns: 1fr; }
+      .hero { padding: 2.5rem 0 3rem; }
+      .hero-image { order: -1; }
+      .hero-badge { left: 0.5rem; bottom: -0.5rem; }
+      section { padding: 3rem 0; }
+      .guide-cta { padding: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap header-inner">
+      <a href="#" class="brand">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <rect width="40" height="40" rx="10" fill="#e85d2a"/>
+          <rect x="8" y="14" width="24" height="14" rx="3" fill="#faf6f0"/>
+          <rect x="10" y="16" width="6" height="5" rx="1" fill="#c4a574" opacity="0.6"/>
+          <rect x="18" y="16" width="6" height="5" rx="1" fill="#c4a574" opacity="0.6"/>
+          <rect x="26" y="16" width="4" height="5" rx="1" fill="#c4a574" opacity="0.6"/>
+          <circle cx="13" cy="30" r="3" fill="#1a1612"/>
+          <circle cx="27" cy="30" r="3" fill="#1a1612"/>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-name">StoryStem</span>
+          <span class="brand-tag">Engineering Through True Stories</span>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#offerings">Programs</a>
+        <a href="#guide">Guide</a>
+        <a href="#contact">Contact</a>
+        <a href="https://storystem.gumroad.com/l/matatu-kit" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Get the Kit</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="hero-eyebrow">Made in Nairobi, Kenya</span>
+          <h1>Build a real Matatu robot. Take it home forever.</h1>
+          <p class="hero-lead">StoryStem teaches kids real electronics and Arduino programming through African stories — not toys, but engineering they can show at science fairs and university interviews.</p>
+          <div class="hero-actions">
+            <a href="https://storystem.gumroad.com/l/matatu-kit" class="btn btn-primary">Buy the Kit on Gumroad</a>
+            <a href="#offerings" class="btn btn-secondary">School Programs</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="assets/matatu-hero.jpg" alt="StoryStem Matatu robot — a laser-cut wooden chassis with Arduino electronics, Bluetooth module, and yellow wheels" width="600" height="450">
+          <div class="hero-badge">🚌 Bluetooth + obstacle avoidance <span>· real Arduino code</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <p class="section-label">About</p>
+        <h2>Robotics education rooted in East Africa</h2>
+        <div class="about-grid">
+          <p class="section-intro">StoryStem is a Nairobi-based robotics program. We teach electronics and programming through story-driven, hands-on experiences — following Amani, a 16-year-old student preparing for Nairobi Hack Weekend. Every session connects technical concepts to characters, problems, and places kids recognise.</p>
+          <ul class="about-points">
+            <li>
+              <span class="icon">🔧</span>
+              <div>
+                <strong>Real engineering, not a toy</strong>
+                <p>Students wire Arduino boards, motor drivers, ultrasonic sensors, and Bluetooth modules from scratch.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">📖</span>
+              <div>
+                <strong>Story-driven curriculum</strong>
+                <p>Our 48-page builder's guide follows Amani's journey — African context, real problems, genuine engineering decisions.</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🏫</span>
+              <div>
+                <strong>Proven in Kenyan schools</strong>
+                <p>Delivered across multiple schools, a public bootcamp in Karen, and praised by parents and teachers at every session.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="offerings">
+      <div class="wrap">
+        <p class="section-label">Programs</p>
+        <h2>Three ways to bring StoryStem to your students</h2>
+        <p class="section-intro">10 weekly sessions for Years 7–8. Groups of 5–10 students. Each student learns to build circuits, write code, and present their work.</p>
+        <div class="offerings">
+          <article class="offering-card">
+            <span class="tier">Flagship</span>
+            <h3>Full Program — Student Keeps Robot</h3>
+            <p>Everything included: 10 facilitated sessions, complete kit, builder's guide, GitHub resources, and a StoryStem Builder Certificate. The student takes home the working robot they built.</p>
+          </article>
+          <article class="offering-card">
+            <span class="tier">School partnership</span>
+            <h3>School Owns the Kits</h3>
+            <p>School purchases kits once and reuses them each term. Includes 10 weekly sessions, guide per student, and certificates. Ideal for embedding robotics across year groups.</p>
+          </article>
+          <article class="offering-card">
+            <span class="tier">Entry point</span>
+            <h3>Sessions Only</h3>
+            <p>10 weekly sessions with a trained facilitator, builder's guide, and certificate. School provides or sources its own components. Great for trialling before committing to kits.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap testimonial">
+        <p class="section-label">What teachers say</p>
+        <blockquote>The moment they got it working was incredible. They learned more from fixing their mistakes than from following steps perfectly.</blockquote>
+        <cite>
+          <strong>Caroline</strong>
+          Women in STEAM Initiative
+        </cite>
+      </div>
+    </section>
+
+    <section id="guide">
+      <div class="wrap">
+        <div class="guide-cta">
+          <div>
+            <h2>The Matatu That Remembered</h2>
+            <p>Our 48-page story-driven builder's guide walks students through every chapter — from first LED circuit to a Bluetooth-controlled, obstacle-avoiding Matatu. Professionally produced and used across all StoryStem programs.</p>
+          </div>
+          <a href="https://storystem.gumroad.com/l/matatu-guide" class="btn btn-primary">Get the 48-Page Guide</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap contact-grid">
+        <div>
+          <p class="section-label">Contact</p>
+          <h2>Let's bring StoryStem to your school</h2>
+          <p class="section-intro">We respond within 24 hours during term time. Happy to share the full curriculum guide for review before any commitment.</p>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:daps218@gmail.com" class="contact-item">
+            <div>
+              <span class="label">Email</span>
+              <span class="value">daps218@gmail.com</span>
+            </div>
+          </a>
+          <a href="https://wa.me/447493111184" class="contact-item">
+            <div>
+              <span class="label">WhatsApp</span>
+              <span class="value">+44 7493 111184</span>
+            </div>
+          </a>
+          <a href="tel:+254119665993" class="contact-item">
+            <div>
+              <span class="label">Kenya</span>
+              <span class="value">0119 665 993</span>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/company/storystem" class="contact-item" target="_blank" rel="noopener">
+            <div>
+              <span class="label">LinkedIn</span>
+              <span class="value">StorySTEM</span>
+            </div>
+          </a>
+          <a href="https://storystem.substack.com" class="contact-item" target="_blank" rel="noopener">
+            <div>
+              <span class="label">Newsletter</span>
+              <span class="value">storystem.substack.com</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>StoryStem · Engineering Through True Stories · Nairobi, Kenya · © 2026</p>
+    </div>
+  </footer>
+
+</body>
+</html>
