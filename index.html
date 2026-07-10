@@ -301,10 +301,30 @@
     }
 
     /* Offerings */
+    .offerings-group {
+      margin-bottom: 2.5rem;
+    }
+
+    .offerings-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .offerings-group-title {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
     .offerings {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
+    }
+
+    .offerings-2 {
+      grid-template-columns: repeat(2, 1fr);
     }
 
     .offering-card {
@@ -341,7 +361,6 @@
       font-size: 0.92rem;
       color: var(--muted);
       flex: 1;
-      margin-bottom: 1.25rem;
     }
 
     /* Quote carousel */
@@ -581,7 +600,8 @@
       .about-grid,
       .contact-grid,
       .guide-layout,
-      .offerings { grid-template-columns: 1fr; }
+      .offerings,
+      .offerings-2 { grid-template-columns: 1fr; }
       .guide-comic { order: -1; }
       .hero { padding: 2.5rem 0 3rem; }
       .hero-image { order: -1; }
@@ -630,7 +650,7 @@
           <p class="hero-lead">StoryStem teaches kids real electronics and Arduino programming through African stories — not toys, but engineering they can show at science fairs and university interviews.</p>
           <div class="hero-actions">
             <a href="https://wa.me/447493111184" class="btn btn-primary">Buy the Kit</a>
-            <a href="#offerings" class="btn btn-secondary">School Programs</a>
+            <a href="#offerings" class="btn btn-secondary">See Programs</a>
           </div>
         </div>
         <div class="hero-image">
@@ -676,24 +696,44 @@
     <section id="offerings">
       <div class="wrap">
         <p class="section-label">Programs</p>
-        <h2>Three ways to bring StoryStem to your students</h2>
-        <p class="section-intro">10 weekly sessions for Years 7–8. Groups of 5–10 students. Each student learns to build circuits, write code, and present their work.</p>
-        <div class="offerings">
-          <article class="offering-card">
-            <span class="tier">Flagship</span>
-            <h3>Full Program — Student Keeps Robot</h3>
-            <p>Everything included: 10 facilitated sessions, complete kit, builder's guide, GitHub resources, and a StoryStem Builder Certificate. The student takes home the working robot they built.</p>
-          </article>
-          <article class="offering-card">
-            <span class="tier">School partnership</span>
-            <h3>School Owns the Kits</h3>
-            <p>School purchases kits once and reuses them each term. Includes 10 weekly sessions, guide per student, and certificates. Ideal for embedding robotics across year groups.</p>
-          </article>
-          <article class="offering-card">
-            <span class="tier">Entry point</span>
-            <h3>Sessions Only</h3>
-            <p>10 weekly sessions with a trained facilitator, builder's guide, and certificate. School provides or sources its own components. Great for trialling before committing to kits.</p>
-          </article>
+        <h2>For parents and for schools</h2>
+        <p class="section-intro">Open to all ages 6 and up. Kids learn to build circuits, write real Arduino code, and leave with something that actually works.</p>
+
+        <div class="offerings-group">
+          <h3 class="offerings-group-title">For parents</h3>
+          <div class="offerings offerings-2">
+            <article class="offering-card">
+              <span class="tier">Bootcamp</span>
+              <h3>Parent Bootcamp</h3>
+              <p>A hands-on multi-day bootcamp your child joins directly. Small groups, trained facilitators, and a working Matatu robot they take home. Message us on WhatsApp to reserve a spot.</p>
+            </article>
+            <article class="offering-card">
+              <span class="tier">At home</span>
+              <h3>Kit + Builder's Guide</h3>
+              <p>Buy the Arduino Matatu kit and the 48-page story-driven guide. Build at home with Amani's story as the map — from first LED to Bluetooth and obstacle avoidance.</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="offerings-group">
+          <h3 class="offerings-group-title">For schools</h3>
+          <div class="offerings">
+            <article class="offering-card">
+              <span class="tier">Flagship</span>
+              <h3>Full Program — Student Keeps Robot</h3>
+              <p>Everything included: 10 facilitated sessions, complete kit, builder's guide, GitHub resources, and a StoryStem Builder Certificate. The student takes home the working robot they built.</p>
+            </article>
+            <article class="offering-card">
+              <span class="tier">School partnership</span>
+              <h3>School Owns the Kits</h3>
+              <p>School purchases kits once and reuses them each term. Includes 10 weekly sessions, guide per student, and certificates. Ideal for embedding robotics across year groups.</p>
+            </article>
+            <article class="offering-card">
+              <span class="tier">Entry point</span>
+              <h3>Sessions Only</h3>
+              <p>10 weekly sessions with a trained facilitator, builder's guide, and certificate. School provides or sources its own components. Great for trialling before committing to kits.</p>
+            </article>
+          </div>
         </div>
       </div>
     </section>
@@ -755,8 +795,8 @@
       <div class="wrap contact-grid">
         <div>
           <p class="section-label">Contact</p>
-          <h2>Let's bring StoryStem to your school</h2>
-          <p class="section-intro">We respond within 24 hours during term time. Message us on WhatsApp to order a kit or ask about school programs.</p>
+          <h2>Let's get your kids building</h2>
+          <p class="section-intro">We respond within 24 hours. Message us on WhatsApp to book a parent bootcamp, order a kit, or bring StoryStem to your school.</p>
         </div>
         <div class="contact-links">
           <a href="mailto:daps218@gmail.com" class="contact-item">
