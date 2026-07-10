@@ -344,24 +344,58 @@
       margin-bottom: 1.25rem;
     }
 
-    /* Testimonial */
-    .testimonial {
+    /* Testimonials */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .testimonial-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .testimonial-card blockquote {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.45;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.25rem;
+    }
+
+    .testimonial-card cite {
+      font-style: normal;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .testimonial-card cite strong {
+      color: var(--ink);
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    .testimonial-featured {
       text-align: center;
       max-width: 36rem;
       margin: 0 auto;
     }
 
-    .testimonial blockquote {
+    .testimonial-featured blockquote {
       font-family: "Fraunces", Georgia, serif;
       font-size: clamp(1.25rem, 2.5vw, 1.6rem);
       font-weight: 600;
       line-height: 1.45;
       letter-spacing: -0.01em;
       margin-bottom: 1.5rem;
-      position: relative;
     }
 
-    .testimonial blockquote::before {
+    .testimonial-featured blockquote::before {
       content: "\201C";
       display: block;
       font-size: 3rem;
@@ -370,13 +404,13 @@
       margin-bottom: 0.5rem;
     }
 
-    .testimonial cite {
+    .testimonial-featured cite {
       font-style: normal;
       font-size: 0.95rem;
       color: var(--muted);
     }
 
-    .testimonial cite strong {
+    .testimonial-featured cite strong {
       color: var(--ink);
       display: block;
       margin-bottom: 0.15rem;
@@ -492,6 +526,7 @@
       .contact-grid,
       .guide-cta,
       .offerings { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
       .hero { padding: 2.5rem 0 3rem; }
       .hero-image { order: -1; }
       .hero-badge { left: 0.5rem; bottom: -0.5rem; }
@@ -525,7 +560,7 @@
         <a href="#offerings">Programs</a>
         <a href="#guide">Guide</a>
         <a href="#contact">Contact</a>
-        <a href="https://storystem.gumroad.com/l/matatu-kit" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Get the Kit</a>
+        <a href="https://wa.me/447493111184?text=Hi%2C%20I%27d%20like%20to%20buy%20the%20StoryStem%20Matatu%20kit" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Buy the Kit</a>
       </nav>
     </div>
   </header>
@@ -538,7 +573,7 @@
           <h1>Build a real Matatu robot. Take it home forever.</h1>
           <p class="hero-lead">StoryStem teaches kids real electronics and Arduino programming through African stories — not toys, but engineering they can show at science fairs and university interviews.</p>
           <div class="hero-actions">
-            <a href="https://storystem.gumroad.com/l/matatu-kit" class="btn btn-primary">Buy the Kit on Gumroad</a>
+            <a href="https://wa.me/447493111184?text=Hi%2C%20I%27d%20like%20to%20buy%20the%20StoryStem%20Matatu%20kit" class="btn btn-primary">Buy the Kit</a>
             <a href="#offerings" class="btn btn-secondary">School Programs</a>
           </div>
         </div>
@@ -608,13 +643,32 @@
     </section>
 
     <section>
-      <div class="wrap testimonial">
-        <p class="section-label">What teachers say</p>
-        <blockquote>The moment they got it working was incredible. They learned more from fixing their mistakes than from following steps perfectly.</blockquote>
-        <cite>
-          <strong>Caroline</strong>
-          Women in STEAM Initiative
-        </cite>
+      <div class="wrap">
+        <p class="section-label">What people say</p>
+        <h2 style="text-align: center; margin-bottom: 2.5rem;">The moments that matter</h2>
+        <div class="testimonials-grid">
+          <article class="testimonial-card">
+            <blockquote>The moment they got it working was incredible. They learned more from fixing their mistakes than from following steps perfectly.</blockquote>
+            <cite>
+              <strong>Caroline</strong>
+              Women in STEAM Initiative
+            </cite>
+          </article>
+          <article class="testimonial-card">
+            <blockquote>When can we do this again?</blockquote>
+            <cite>
+              <strong>Anonymous</strong>
+              Student
+            </cite>
+          </article>
+          <article class="testimonial-card">
+            <blockquote>Wooooaaah!</blockquote>
+            <cite>
+              <strong>A group of kids</strong>
+              The first time a DC motor spins
+            </cite>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -623,9 +677,9 @@
         <div class="guide-cta">
           <div>
             <h2>The Matatu That Remembered</h2>
-            <p>Our 48-page story-driven builder's guide walks students through every chapter — from first LED circuit to a Bluetooth-controlled, obstacle-avoiding Matatu. Professionally produced and used across all StoryStem programs.</p>
+            <p>Our 48-page story-driven builder's guide walks students through every chapter — from first LED circuit to a Bluetooth-controlled, obstacle-avoiding Matatu. Professionally produced and available to purchase.</p>
           </div>
-          <a href="https://storystem.gumroad.com/l/matatu-guide" class="btn btn-primary">Get the 48-Page Guide</a>
+          <a href="https://dapsmith8.gumroad.com/l/ztnwfj" class="btn btn-primary" target="_blank" rel="noopener">Buy the Guide on Gumroad</a>
         </div>
       </div>
     </section>
@@ -635,7 +689,7 @@
         <div>
           <p class="section-label">Contact</p>
           <h2>Let's bring StoryStem to your school</h2>
-          <p class="section-intro">We respond within 24 hours during term time. Happy to share the full curriculum guide for review before any commitment.</p>
+          <p class="section-intro">We respond within 24 hours during term time. Message us on WhatsApp to order a kit or ask about school programs.</p>
         </div>
         <div class="contact-links">
           <a href="mailto:daps218@gmail.com" class="contact-item">
