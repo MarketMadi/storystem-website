@@ -11,7 +11,7 @@ Single-page website for [StoryStem](https://github.com/yourusername/storystem-we
 ```bash
 cd storystem-website
 git init
-git add index.html assets/matatu-hero.jpg README.md
+git add index.html assets/ README.md
 git commit -m "Add StoryStem landing page"
 git branch -M main
 git remote add origin git@github.com:YOUR_USERNAME/storystem-website.git
@@ -37,3 +37,18 @@ Replace with your actual product links once published on Gumroad.
 |------|---------|
 | `index.html` | The entire site (no build step) |
 | `assets/matatu-hero.jpg` | Hero photo of the assembled Matatu robot |
+| `assets/videos/storystem-intro.mp4` | Company intro video (About section, ~1:45) |
+| `assets/videos/storystem-intro-poster.jpg` | Poster frame for company intro |
+| `assets/videos/matatu-explainer.mp4` | Product explainer video (Programs section, ~1:50) |
+| `assets/videos/matatu-explainer-poster.jpg` | Poster frame for product explainer |
+
+## Video compression
+
+Source footage from a camera/SD card should be compressed before committing. Target ~10–15 MB per file for GitHub Pages:
+
+```bash
+ffmpeg -i SOURCE.mp4 -vf scale=-2:720 -c:v libx264 -crf 28 -preset slow -c:a aac -b:a 128k assets/videos/OUTPUT.mp4
+ffmpeg -ss 5 -i assets/videos/OUTPUT.mp4 -vframes 1 -q:v 2 assets/videos/OUTPUT-poster.jpg
+```
+
+Adjust `-ss` to pick a better poster frame if needed.

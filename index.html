@@ -300,6 +300,135 @@
       color: var(--muted);
     }
 
+    .about-content .section-intro {
+      margin-bottom: 1.5rem;
+    }
+
+    /* Video */
+    .video-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3rem;
+      align-items: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .video-block {
+      margin: 0;
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      background: var(--ink);
+    }
+
+    .video-poster {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      background-color: var(--ink);
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      transition: filter 0.2s;
+    }
+
+    .video-poster:hover {
+      filter: brightness(1.05);
+    }
+
+    .video-poster::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26, 22, 18, 0.65) 0%, rgba(26, 22, 18, 0.15) 50%, rgba(26, 22, 18, 0.25) 100%);
+    }
+
+    .video-poster-title,
+    .video-poster-play,
+    .video-duration {
+      position: relative;
+      z-index: 1;
+    }
+
+    .video-poster-title {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: white;
+      text-align: center;
+      padding: 0 1.5rem;
+      max-width: 20rem;
+      line-height: 1.3;
+    }
+
+    .video-poster-play {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      background: var(--matatu);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      padding-left: 0.2rem;
+      box-shadow: 0 4px 20px rgba(232, 93, 42, 0.5);
+    }
+
+    .video-duration {
+      position: absolute;
+      bottom: 0.75rem;
+      right: 0.75rem;
+      background: rgba(26, 22, 18, 0.75);
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+    }
+
+    .video-player {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      background: var(--ink);
+    }
+
+    .video-player[hidden],
+    .video-poster[hidden] {
+      display: none;
+    }
+
+    .video-caption {
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .video-side p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+    }
+
     /* Offerings */
     .offerings-group {
       margin-bottom: 2.5rem;
@@ -600,9 +729,11 @@
       .about-grid,
       .contact-grid,
       .guide-layout,
+      .video-layout,
       .offerings,
       .offerings-2 { grid-template-columns: 1fr; }
-      .guide-comic { order: -1; }
+      .guide-comic,
+      .video-block-media { order: -1; }
       .hero { padding: 2.5rem 0 3rem; }
       .hero-image { order: -1; }
       .hero-badge { left: 0.5rem; bottom: -0.5rem; }
@@ -664,31 +795,46 @@
       <div class="wrap">
         <p class="section-label">About</p>
         <h2>Robotics education rooted in East Africa</h2>
-        <div class="about-grid">
-          <p class="section-intro">StoryStem is a Nairobi-based robotics program. We teach electronics and programming through story-driven, hands-on experiences — following Amani, a 16-year-old student preparing for Nairobi Hack Weekend. Every session connects technical concepts to characters, problems, and places kids recognise.</p>
-          <ul class="about-points">
-            <li>
-              <span class="icon">🔧</span>
-              <div>
-                <strong>Real engineering, not a toy</strong>
-                <p>Students wire Arduino boards, motor drivers, ultrasonic sensors, and Bluetooth modules from scratch.</p>
-              </div>
-            </li>
-            <li>
-              <span class="icon">📖</span>
-              <div>
-                <strong>Story-driven curriculum</strong>
-                <p>Our 48-page builder's guide follows Amani's journey — African context, real problems, genuine engineering decisions.</p>
-              </div>
-            </li>
-            <li>
-              <span class="icon">🏫</span>
-              <div>
-                <strong>Proven in Kenyan schools</strong>
-                <p>Delivered across multiple schools, a public bootcamp in Karen, and praised by parents and teachers at every session.</p>
-              </div>
-            </li>
-          </ul>
+        <div class="video-layout">
+          <figure class="video-block video-block-media">
+            <div class="video-frame">
+              <button type="button" class="video-poster" aria-label="Play video: Why we built StoryStem (1 minute 45 seconds)" style="background-image: url('assets/videos/storystem-intro-poster.jpg')">
+                <span class="video-poster-title">Why we built StoryStem</span>
+                <span class="video-poster-play" aria-hidden="true">▶</span>
+                <span class="video-duration">1:45</span>
+              </button>
+              <video class="video-player" controls playsinline preload="none" poster="assets/videos/storystem-intro-poster.jpg" hidden>
+                <source src="assets/videos/storystem-intro.mp4" type="video/mp4">
+              </video>
+            </div>
+            <figcaption class="video-caption">StoryStem in Nairobi — robotics education through African stories.</figcaption>
+          </figure>
+          <div class="about-content">
+            <p class="section-intro">StoryStem is a Nairobi-based robotics program. We teach electronics and programming through story-driven, hands-on experiences — following Amani, a 16-year-old student preparing for Nairobi Hack Weekend. Every session connects technical concepts to characters, problems, and places kids recognise.</p>
+            <ul class="about-points">
+              <li>
+                <span class="icon">🔧</span>
+                <div>
+                  <strong>Real engineering, not a toy</strong>
+                  <p>Students wire Arduino boards, motor drivers, ultrasonic sensors, and Bluetooth modules from scratch.</p>
+                </div>
+              </li>
+              <li>
+                <span class="icon">📖</span>
+                <div>
+                  <strong>Story-driven curriculum</strong>
+                  <p>Our 48-page builder's guide follows Amani's journey — African context, real problems, genuine engineering decisions.</p>
+                </div>
+              </li>
+              <li>
+                <span class="icon">🏫</span>
+                <div>
+                  <strong>Proven in Kenyan schools</strong>
+                  <p>Delivered across multiple schools, a public bootcamp in Karen, and praised by parents and teachers at every session.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -698,6 +844,26 @@
         <p class="section-label">Programs</p>
         <h2>For parents and for schools</h2>
         <p class="section-intro">Open to all ages 6 and up. Kids learn to build circuits, write real Arduino code, and leave with something that actually works.</p>
+
+        <div class="video-layout">
+          <figure class="video-block video-block-media">
+            <div class="video-frame">
+              <button type="button" class="video-poster" aria-label="Play video: How the Matatu kit works (1 minute 50 seconds)" style="background-image: url('assets/videos/matatu-explainer-poster.jpg')">
+                <span class="video-poster-title">How the Matatu kit works</span>
+                <span class="video-poster-play" aria-hidden="true">▶</span>
+                <span class="video-duration">1:50</span>
+              </button>
+              <video class="video-player" controls playsinline preload="none" poster="assets/videos/matatu-explainer-poster.jpg" hidden>
+                <source src="assets/videos/matatu-explainer.mp4" type="video/mp4">
+              </video>
+            </div>
+            <figcaption class="video-caption">From first wire to a Bluetooth-controlled robot kids take home.</figcaption>
+          </figure>
+          <div class="video-side">
+            <p>The Matatu kit includes a laser-cut wooden chassis, Arduino board, motor driver, ultrasonic sensor, and Bluetooth module. Kids wire every component, write real code, and drive the finished robot from a phone.</p>
+            <a href="https://wa.me/447493111184" class="btn btn-primary">Buy the Kit</a>
+          </div>
+        </div>
 
         <div class="offerings-group">
           <h3 class="offerings-group-title">For parents</h3>
@@ -858,6 +1024,28 @@
       });
 
       start();
+    })();
+
+    (function () {
+      function playVideo(poster) {
+        var frame = poster.closest('.video-frame');
+        var video = frame.querySelector('.video-player');
+        poster.hidden = true;
+        video.hidden = false;
+        video.play();
+      }
+
+      document.querySelectorAll('.video-poster').forEach(function (poster) {
+        poster.addEventListener('click', function () {
+          playVideo(poster);
+        });
+        poster.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            playVideo(poster);
+          }
+        });
+      });
     })();
   </script>
 
