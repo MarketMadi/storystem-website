@@ -1,4 +1,4 @@
-# StoryStem — GitHub Pages Site
+# StoryStem: GitHub Pages Site
 
 Single-page website for [StoryStem](https://github.com/yourusername/storystem-website).
 
@@ -44,7 +44,7 @@ Replace with your actual product links once published on Gumroad.
 
 ## Video compression
 
-Source footage from a camera/SD card should be compressed before committing. Target ~10–15 MB per file for GitHub Pages:
+Source footage from a camera/SD card should be compressed before committing. Target ~10-15 MB per file for GitHub Pages:
 
 ```bash
 ffmpeg -i SOURCE.mp4 -vf scale=-2:720 -c:v libx264 -crf 28 -preset slow -c:a aac -b:a 128k assets/videos/OUTPUT.mp4
