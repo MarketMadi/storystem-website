@@ -1,6 +1,8 @@
 # StoryStem: GitHub Pages Site
 
-Single-page website for [StoryStem](https://github.com/yourusername/storystem-website).
+Live site: [https://marketmadi.github.io/storystem-website/](https://marketmadi.github.io/storystem-website/)
+
+Single-page website for [StoryStem](https://github.com/MarketMadi/storystem-website).
 
 ## Deploy to GitHub Pages (one-time setup)
 
@@ -14,13 +16,13 @@ git init
 git add index.html assets/ README.md
 git commit -m "Add StoryStem landing page"
 git branch -M main
-git remote add origin git@github.com:YOUR_USERNAME/storystem-website.git
+git remote add origin git@github.com:MarketMadi/storystem-website.git
 git push -u origin main
 ```
 
 3. In the repo: **Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch: main / (root)**.
 
-4. Your site will be live at `https://YOUR_USERNAME.github.io/storystem-website/` (or `https://YOUR_USERNAME.github.io/` if using a user site repo).
+4. Your site will be live at `https://marketmadi.github.io/storystem-website/` (or `https://YOUR_USERNAME.github.io/` if using a user site repo).
 
 ## Before you go live
 
